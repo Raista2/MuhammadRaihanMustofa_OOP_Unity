@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Vector2 timeToStop;
     [SerializeField] Vector2 stopClamp;
 
+    Vector2 screenBounds;
     Vector2 moveDirection;
     Vector2 moveVelocity;
     Vector2 moveFriction;
@@ -78,7 +79,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void MoveBound()
     {
-        //Kosongkan untuk sementara
+        //Mengambil ukuran layar
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+
+        //Membatasi gerak player agar tidak keluar layar
+        Vector2 viewPos = transform.position;
+        viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + 0.2f, screenBounds.x - 0.2f);
+        viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y * -1 - 0.1f, screenBounds.y - 0.5f);
+        transform.position = viewPos;
     }
 
     public bool IsMoving()

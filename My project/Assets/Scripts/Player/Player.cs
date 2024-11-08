@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    Player Instance;
+    public Player Instance;
     PlayerMovement playerMovement;
     Animator animator;
 
@@ -40,5 +40,6 @@ public class Player : MonoBehaviour
     {
         //Update animasi player
         animator.SetBool("IsMoving", playerMovement.IsMoving());
+        playerMovement.MoveBound();
     }
 }
