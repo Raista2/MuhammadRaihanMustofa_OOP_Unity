@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Weapon : MonoBehaviour
+public class EnemyBoss : EnemyHorizontal
 {
-    [Header("Weapon Stats")]
-    [SerializeField] private float shootIntervalInSeconds = 3f;
-
     [Header("Bullets")]
     public Bullet bullet;
-    [SerializeField] private Transform bulletSpawnPoint;
+    public Transform bulletSpawnPoint;
 
     [Header("Bullet Pool")]
     private IObjectPool<Bullet> objectPool;
@@ -18,9 +15,8 @@ public class Weapon : MonoBehaviour
     private readonly bool collectionCheck = false;
     private readonly int defaultCapacity = 30;
     private readonly int maxSize = 100;
-
     private float timer;
-    public Transform parentTransform;
+    public float shootIntervalInSeconds = 2.0f; // Add this line to define shootIntervalInSeconds
 
     void Awake()
     {
@@ -73,10 +69,11 @@ public class Weapon : MonoBehaviour
         Destroy(bullet.gameObject);
     }
 
-    private void Update()
+    public override void Update()
     {
+        base.Update();
+        
         timer += Time.deltaTime;
-
         if (timer >= shootIntervalInSeconds)
         {
             Shoot();

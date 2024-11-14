@@ -42,4 +42,15 @@ public class Player : MonoBehaviour
         animator.SetBool("IsMoving", playerMovement.IsMoving());
         playerMovement.MoveBound();
     }
+
+    private WeaponPickup currentWeaponPickup;
+
+    public void SwitchWeapon(Weapon newWeapon, WeaponPickup newWeaponPickup)
+    {
+        if (currentWeaponPickup != null)
+        {
+            currentWeaponPickup.PickupHandler(true);  // Make the previous weapon pickup visible again
+        }
+        currentWeaponPickup = newWeaponPickup;
+    }
 }
