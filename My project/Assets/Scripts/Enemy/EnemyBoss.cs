@@ -49,6 +49,8 @@ public class EnemyBoss : EnemyHorizontal
     {
         Bullet newBullet =  Instantiate(bullet); 
         newBullet.SetObjectPool(objectPool);
+        int layerIndex = LayerMask.NameToLayer("BulletEnemy");
+        newBullet.gameObject.layer = layerIndex;
         return newBullet;
     }
 

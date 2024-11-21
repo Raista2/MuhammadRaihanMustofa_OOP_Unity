@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     protected bool isActive = true;
     protected Rigidbody2D rb;
 
+    public EnemySpawner enemySpawner;
+
     protected virtual void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -20,11 +22,16 @@ public class Enemy : MonoBehaviour
 
     protected virtual void OnBecameInvisible()
     {
-        Destroy(gameObject);
+        Die();
     }
 
     public virtual void Die()
     {
+        if (enemySpawner != null)
+        {
+            enemySpawner.OnEnemyKilled();
+        }
+        
         Destroy(gameObject);
     }
 }

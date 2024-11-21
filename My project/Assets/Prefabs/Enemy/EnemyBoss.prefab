@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5572886733331263572}
   - component: {fileID: 4478383447702232200}
   - component: {fileID: 3112183583118452972}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyBoss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   moveSpeed: 2
+  enemySpawner: {fileID: 6460582342845882544, guid: 9a06485307ea439439cc79b996e149ae, type: 3}
   bullet: {fileID: 4561767801320512514, guid: e973ae338678b2e45b2576f42db4ecbf, type: 3}
   bulletSpawnPoint: {fileID: 8630944704063779299}
   shootIntervalInSeconds: 2
@@ -150,7 +151,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -232,7 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e2f871883326484badef06b9c0233cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blinkingCount: 7
   blinkInterval: 0.1
   blinkMaterial: {fileID: 2100000, guid: 755ace8cabe6b2545aff5a9f4868fffa, type: 2}
   isInvincible: 0

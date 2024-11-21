@@ -51,8 +51,10 @@ public class Weapon : MonoBehaviour
 
     private Bullet CreateBullet()
     {
-        Bullet newBullet =  Instantiate(bullet); 
+        Bullet newBullet =  Instantiate(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation); 
         newBullet.SetObjectPool(objectPool);
+        int layerIndex = LayerMask.NameToLayer("BulletPlayer");
+        newBullet.gameObject.layer = layerIndex;
         return newBullet;
     }
 

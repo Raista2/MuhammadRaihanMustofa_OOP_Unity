@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5302399191732860489}
   - component: {fileID: 5301773253911083525}
   - component: {fileID: -2590305582106520130}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyHorizontal
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   moveSpeed: 5
+  enemySpawner: {fileID: 6729983340870348170, guid: 16fc7ed4aa1d7c04a9aa60cc6d8129f9, type: 3}
 --- !u!61 &-1587384795433866661
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -147,7 +148,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -229,7 +230,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e2f871883326484badef06b9c0233cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blinkingCount: 7
   blinkInterval: 0.1
   blinkMaterial: {fileID: 2100000, guid: 755ace8cabe6b2545aff5a9f4868fffa, type: 2}
   isInvincible: 0

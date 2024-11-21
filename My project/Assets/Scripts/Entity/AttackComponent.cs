@@ -13,20 +13,21 @@ public class AttackComponent : MonoBehaviour
         if (other.gameObject.tag == gameObject.tag) //Collision dengan tag sama
             return;
 
-        var hitbox = other.GetComponent<HitboxComponent>();
-        if (hitbox != null)
+        if (other.GetComponent<HitboxComponent>() != null)
         {
-            if (this.gameObject.tag == "Bullet")
-                hitbox.Damage(bullet);
-            else 
-                hitbox.Damage(damage);
-            
+            HitboxComponent hitbox = other.GetComponent<HitboxComponent>();
 
-            var invincibility = other.GetComponent<InvincibilityComponent>();
-            if (invincibility != null)
+            if (bullet != null)
             {
-                invincibility.Flash();
+                hitbox.Damage(bullet.damage);
             }
+
+            hitbox.Damage(damage);
+        }
+
+        if (other.GetComponent<InvincibilityComponent>() != null)
+        {
+            other.GetComponent<InvincibilityComponent>().Flash();
         }
     }
 }
