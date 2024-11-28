@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 6798349693586875884}
   - component: {fileID: 8656513408043327649}
   - component: {fileID: 985855089092378470}
-  - component: {fileID: 1837141973553196098}
   - component: {fileID: 5901560416220589883}
   - component: {fileID: -805255545998143443}
   - component: {fileID: -3478066076673430050}
   - component: {fileID: 2167617521763512007}
   - component: {fileID: 298313200428218237}
+  - component: {fileID: 7751969512397066641}
   m_Layer: 7
   m_Name: EnemyTargeting
   m_TagString: Enemy
@@ -54,7 +54,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -118,21 +118,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1837141973553196098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4641289752153287434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d304839d870380f459dfc5aaedf308e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 1
-  moveSpeed: 1
-  enemySpawner: {fileID: 6045800654338876175, guid: 22c46081af85a23479501c7769aac557, type: 3}
 --- !u!61 &5901560416220589883
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -233,3 +218,21 @@ MonoBehaviour:
   blinkInterval: 0.1
   blinkMaterial: {fileID: 2100000, guid: 755ace8cabe6b2545aff5a9f4868fffa, type: 2}
   isInvincible: 0
+--- !u!114 &7751969512397066641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4641289752153287434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4b482088e3dea44b0e814de8cb4bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 0
+  enemyKilledEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  moveSpeed: 2
+  mainCamera: {fileID: 4637161560279528992, guid: b661e8ac1f263c8479f278b160dfd133, type: 3}

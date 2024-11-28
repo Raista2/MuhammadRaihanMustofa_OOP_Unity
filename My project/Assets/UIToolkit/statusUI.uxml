@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; font-size: 45px;">
+        <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="health-label" style="align-self: flex-start; align-items: flex-start; justify-content: flex-start; color: rgb(255, 255, 255);" />
+        <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="points-label" style="align-self: flex-start; color: rgb(255, 255, 255);" />
+        <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="wave-label" style="align-self: flex-end; color: rgb(255, 255, 255);" />
+        <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="enemy-count-label" style="align-self: flex-end; color: rgb(255, 255, 255);" />
+    </ui:VisualElement>
+</ui:UXML>

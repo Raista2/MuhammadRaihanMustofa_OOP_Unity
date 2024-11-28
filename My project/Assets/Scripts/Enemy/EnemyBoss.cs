@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class EnemyBoss : EnemyHorizontal
+public class EnemyBoss : EnemyHorizontalMovement
 {
-    [Header("Bullets")]
     public Bullet bullet;
     public Transform bulletSpawnPoint;
+    public float shootInterval = 2f;
+
+    private float shootTimer;
 
     [Header("Bullet Pool")]
     private IObjectPool<Bullet> objectPool;
@@ -15,16 +15,14 @@ public class EnemyBoss : EnemyHorizontal
     private readonly bool collectionCheck = false;
     private readonly int defaultCapacity = 30;
     private readonly int maxSize = 100;
-    private float timer;
-    public float shootIntervalInSeconds = 2.0f; // Add this line to define shootIntervalInSeconds
 
-    void Awake()
+    public void Awake()
     {
         objectPool = new ObjectPool<Bullet>(
             CreateBullet,
-            OnGetFromPool,
-            OnReleaseToPool,
-            OnDestroyPooledObject,
+            OnGetBullet,
+            OnReleaseBullet,
+            OnDestroyBullet,
             collectionCheck,
             defaultCapacity,
             maxSize
@@ -36,56 +34,61 @@ public class EnemyBoss : EnemyHorizontal
 
             if (bulletSpawnPoint == null)
             {
-                Debug.LogWarning("BulletSpawnPoint not found as a child of Weapon.");
+                Debug.LogWarning(this + " tidak menemukan BulletSpawnPoint");
             }
             else
             {
-                bulletSpawnPoint.position = new Vector3(0,1,0);
+                bulletSpawnPoint.position = new Vector3(0, 1, 0); 
             }
+        }
+    }
+
+    void Start()
+    {
+        shootTimer = 0; 
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        
+        shootTimer += Time.deltaTime;
+        if (shootTimer >= shootInterval)
+        {
+            Shoot();
+            shootTimer = 0;
         }
     }
 
     private Bullet CreateBullet()
     {
-        Bullet newBullet =  Instantiate(bullet); 
+        Bullet newBullet = Instantiate(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         newBullet.SetObjectPool(objectPool);
         int layerIndex = LayerMask.NameToLayer("BulletEnemy");
         newBullet.gameObject.layer = layerIndex;
         return newBullet;
     }
 
-    private void OnGetFromPool(Bullet bullet)
+    private void OnGetBullet(Bullet bullet)
     {
         bullet.gameObject.SetActive(true);
         bullet.transform.position = bulletSpawnPoint.position;
         bullet.transform.rotation = bulletSpawnPoint.rotation;
     }
 
-    private void OnReleaseToPool(Bullet bullet)
+    private void OnReleaseBullet(Bullet bullet)
     {
         bullet.gameObject.SetActive(false);
     }
 
-    private void OnDestroyPooledObject(Bullet bullet)
+    private void OnDestroyBullet(Bullet bullet)
     {
         Destroy(bullet.gameObject);
     }
-
-    public override void Update()
+    
+    public Bullet Shoot()
     {
-        base.Update();
-        
-        timer += Time.deltaTime;
-        if (timer >= shootIntervalInSeconds)
-        {
-            Shoot();
-            timer = 0f;
-        }
-    }
-
-    private Bullet Shoot()
-    {
-        if (objectPool != null)
+        if (objectPool != null && bulletSpawnPoint != null)
         {
             Bullet bulletInstance = objectPool.Get();
             return bulletInstance;

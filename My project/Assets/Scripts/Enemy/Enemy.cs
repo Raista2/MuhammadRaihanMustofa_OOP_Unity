@@ -1,37 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] protected int level = 1;
-    [SerializeField] protected float moveSpeed = 5f;
-    protected bool isActive = true;
-    protected Rigidbody2D rb;
+  [SerializeField] protected int level;
 
-    public EnemySpawner enemySpawner;
+  public UnityEvent enemyKilledEvent;
 
-    protected virtual void Start()
-    {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        if (rb == null)
-            rb = gameObject.AddComponent<Rigidbody2D>();
-        
-        rb.gravityScale = 0f;
-    }
+  private void Start()
+  {
+    enemyKilledEvent ??= new UnityEvent();
+  }
 
-    protected virtual void OnBecameInvisible()
-    {
-        Die();
-    }
+  public void SetLevel(int level)
+  {
+    this.level = level;
+  }
 
-    public virtual void Die()
-    {
-        if (enemySpawner != null)
-        {
-            enemySpawner.OnEnemyKilled();
-        }
-        
-        Destroy(gameObject);
-    }
+  public int GetLevel()
+  {
+    return level;
+  }
+
+  private void OnDestroy()
+  {
+    enemyKilledEvent.Invoke();
+  }
 }

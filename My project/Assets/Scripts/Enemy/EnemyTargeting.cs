@@ -1,36 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyTargeting : Enemy
+public class EnemyTargetPlayer : Enemy
 {
-    private Transform playerTransform;
+    public float moveSpeed = 2f;
 
-    protected override void Start()
+    private Transform player;
+    [SerializeField] Camera mainCamera;
+    Rigidbody2D rb;
+
+    void Start()
     {
-        base.Start();
-        transform.position = new Vector3(Random.Range(-8f, 8f), 6f, 0);
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        rb = GetComponent<Rigidbody2D>();
+    }
 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+    private void Awake()
+    {
+        // Menentukan posisi spawn
+        if (mainCamera != null)
         {
-            playerTransform = player.transform;
+            float spawnX = Random.Range(0, Screen.width);
+            Vector3 spawnPosition = mainCamera.ScreenToWorldPoint(new Vector3(spawnX, Screen.height, mainCamera.transform.position.z));
+            transform.position = new Vector3(spawnPosition.x, spawnPosition.y, 0);
+        }
+        else
+        {
+            Debug.LogError(this + " tidak menemukan MainCamera");
         }
     }
 
-    private void Update()
+    void FixedUpdate()
     {
-        if (!isActive || playerTransform == null) return;
-
-        Vector2 direction = (playerTransform.position - transform.position).normalized;
-        rb.velocity = direction * moveSpeed;
+        if (player != null)
+        {
+            Vector2 direction = (player.position - transform.position).normalized;
+            rb.velocity = moveSpeed * direction;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            Die();
+            Destroy(gameObject);
         }
     }
 }

@@ -1,50 +1,52 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
     public EnemySpawner[] enemySpawners;
+
     public float timer = 0;
-    [SerializeField] public float waveInterval = 5f;
-    public int waveNumber = 0;
+    [SerializeField] private float waveInterval = 5f;
+
+    public int waveNumber = 1;
+
     public int totalEnemies = 0;
+    public int points = 0;
 
-    public bool waveCleared = true;
-
-    private void Update()
+    private void OnEnable()
     {
-        if (waveCleared)
-            timer += Time.deltaTime;
-        
-        if (timer >= waveInterval && waveCleared)
+        foreach (EnemySpawner spawner in enemySpawners)
         {
-            StartWave();
+            spawner.combatManager = this;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (totalEnemies == 0)
+            timer += Time.deltaTime;
+
+        if (timer >= waveInterval)
+        {
+            foreach (EnemySpawner spawner in enemySpawners)
+            {
+                if (spawner.spawnedEnemy.GetLevel() <= waveNumber && !spawner.isSpawning)
+                {
+                    spawner.ResetSpawnCount();
+
+                    totalEnemies += spawner.spawnCount;
+
+                    spawner.SpawnEnemy();
+                }
+            }
+
+            waveNumber++;
             timer = 0;
         }
     }
 
-    private void StartWave()
+    public void IncreaseKill()
     {
-        waveNumber++;
-        waveCleared = false;
-        totalEnemies = 0;
-
-        foreach (EnemySpawner spawner in enemySpawners)
-        {
-            spawner.ResetSpawner();
-            spawner.isSpawning = true;
-        }
-    }
-
-    public void CheckWaveCompletion()
-    {
-        foreach (var spawner in enemySpawners)
-        {
-            if (spawner.totalKillWave > 0)
-                return;
-        }
-
-        waveCleared = true;
+        totalEnemies--;
     }
 }

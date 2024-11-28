@@ -5,16 +5,15 @@ using UnityEngine;
 public class HealthComponent : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
-    private float health;
+    private int health;
 
     private void Awake()
     {
         health = maxHealth;
     }
 
-    public float Health => health;
 
-    public void Subtract(float amount)
+    public void Subtract(int amount)
     {
         health -= amount;
         Debug.Log($"{gameObject.name} has {health} health left.");
@@ -22,5 +21,15 @@ public class HealthComponent : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth;
     }
 }

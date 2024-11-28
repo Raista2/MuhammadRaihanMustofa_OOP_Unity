@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2166976521632263658}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5886878, y: -0.06806235, z: 1.1417674}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,12 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d3b6e8f126b59409d2105b5d05604d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnedEnemy: {fileID: 0}
+  spawnedEnemy: {fileID: 2631102812029903698, guid: 39e045f08df0d0f468bee38f631899de, type: 3}
   minimumKillsToIncreaseSpawnCount: 3
   totalKill: 0
-  totalKillWave: 0
   spawnInterval: 3
-  spawnCount: 0
+  spawnCount: 1
   defaultSpawnCount: 1
   spawnCountMultiplier: 1
   multiplierIncreaseCount: 1

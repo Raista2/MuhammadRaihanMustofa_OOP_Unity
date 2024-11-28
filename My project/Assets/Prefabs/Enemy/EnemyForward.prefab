@@ -54,7 +54,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -127,12 +127,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7882657256641471887}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52dc592b7e1d5514782a3312b020f1f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b923e472cf1fab4680011c88d28a2dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
+  enemyKilledEvent:
+    m_PersistentCalls:
+      m_Calls: []
   moveSpeed: 5
-  enemySpawner: {fileID: 7706815835446607701, guid: 9235be3ca361225419bfa336fb67f02f, type: 3}
+  mainCamera: {fileID: 4637161560279528992, guid: b661e8ac1f263c8479f278b160dfd133, type: 3}
 --- !u!61 &5109440524457451148
 BoxCollider2D:
   m_ObjectHideFlags: 0

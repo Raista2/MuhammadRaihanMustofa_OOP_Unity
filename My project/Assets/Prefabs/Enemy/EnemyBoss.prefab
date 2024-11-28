@@ -54,7 +54,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -131,11 +131,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
-  moveSpeed: 2
-  enemySpawner: {fileID: 6460582342845882544, guid: 9a06485307ea439439cc79b996e149ae, type: 3}
+  enemyKilledEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  moveSpeed: 1
+  mainCamera: {fileID: 4637161560279528992, guid: b661e8ac1f263c8479f278b160dfd133, type: 3}
   bullet: {fileID: 4561767801320512514, guid: e973ae338678b2e45b2576f42db4ecbf, type: 3}
   bulletSpawnPoint: {fileID: 8630944704063779299}
-  shootIntervalInSeconds: 2
+  shootInterval: 2
 --- !u!61 &-1670848119290332305
 BoxCollider2D:
   m_ObjectHideFlags: 0

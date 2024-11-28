@@ -1,32 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyForward : Enemy
+public class EnemyForwardMovement : Enemy
 {
-    float screenHeight;
-    float randomX;
-    float screenBoundary;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] Camera mainCamera;
+    Vector3 spawnPosition;
 
-    protected override void Start()
+    private void Awake()
     {
-        base.Start();
-        
-        screenBoundary = Camera.main.orthographicSize * Camera.main.aspect;
-        screenHeight = Camera.main.orthographicSize;
-        randomX = Random.Range(-screenBoundary, screenBoundary);
-        transform.position = new Vector3(randomX, screenHeight + 1f, 0);
+        // Menentukan posisi spawn
+        if (mainCamera != null)
+        {
+            float spawnX = Random.Range(0, Screen.width);
+            spawnPosition = mainCamera.ScreenToWorldPoint(new Vector3(spawnX, Screen.height, mainCamera.transform.position.z));
+            transform.position = new Vector3(spawnPosition.x, spawnPosition.y, 0);
+        }
+        else
+        {
+            Debug.LogError(this + " tidak menemukan MainCamera");
+        }
     }
 
     private void Update()
     {
-        if (!isActive) return;
-        
-        transform.Translate(Vector3.down * -moveSpeed * Time.deltaTime);
+        transform.Translate(moveSpeed * Time.deltaTime * Vector2.up);
+    }
 
-        if (transform.position.y > screenHeight + 5f|| transform.position.y < -screenHeight - 5f)
-        {
-            transform.position = new Vector3(randomX, screenHeight + 1f, 0);
-        }
+    void OnBecameInvisible()
+    {
+        transform.position = new Vector3(spawnPosition.x, spawnPosition.y, 0);
     }
 }
